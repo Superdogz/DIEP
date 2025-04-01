@@ -1,22 +1,25 @@
 import pygame
+import os
 import math
 import random
 
 border_x, border_y = 2000, 2000
 size = (1440, 780)
 
-
 pygame.init()
 pygame.display.set_caption("Game")
 screen = pygame.display.set_mode(size)
 
+base_path = os.path.dirname(__file__)
+assets_path = os.path.join(base_path, "..", "assets")
 
+# Load images using the correct path
+bg = pygame.image.load(os.path.join(assets_path, "background.png"))
+s = pygame.image.load(os.path.join(assets_path, "square.png"))
+t = pygame.image.load(os.path.join(assets_path, "triangle.png"))
+h = pygame.image.load(os.path.join(assets_path, "hexagon.png"))
+t_1 = pygame.image.load(os.path.join(assets_path, "main-tank.png"))
 
-bg = pygame.image.load("assets/background.svg")
-s = pygame.image.load("assets/square.svg")
-t = pygame.image.load("assets/triangle.svg")
-h = pygame.image.load("assets/hexagon.svg")
-t_1 =  pygame.image.load("assets/main-tank.svg")
 
 class Player:
     def __init__(self, x, y, type, health = 100, x_acc=0, y_acc=0, angle=0, score=0, recoil = 1, regen=1, max=1, body=1, speed=1, penetration=1, damage=1, reload=1, movement=1, die = 0):
@@ -302,8 +305,8 @@ while not done:
                 player.x_acc = 0
                 player.y_acc = 0
                 #recoil
-                player.x_acc += math.cos(math.atan2(player.y-square.y,square.x-player.x))*math.log(8*math.sqrt(pow(square.x-player.x,2)+pow(square.y-player.y,2)),2)/3
-                player.y_acc += math.sin(math.atan2(player.y-square.y,square.x-player.x))*math.log(8*math.sqrt(pow(square.x-player.x,2)+pow(square.y-player.y,2)),2)/3
+                player.x_acc += math.cos(math.atan2(player.y-square.y,square.x-player.x))*math.log(8*math.sqrt(pow(square.x-player.x,2)+pow(square.y-player.y,2)),2)/6
+                player.y_acc += math.sin(math.atan2(player.y-square.y,square.x-player.x))*math.log(8*math.sqrt(pow(square.x-player.x,2)+pow(square.y-player.y,2)),2)/6
         #delete square if health is equal to 0
         if square.health <= 0:
             square.health = 0
@@ -321,8 +324,8 @@ while not done:
                 player.x_acc = 0
                 player.y_acc = 0
                 #recoil
-                player.x_acc += math.cos(math.atan2(player.y-triangle.y,triangle.x-player.x))*math.log(8*math.sqrt(pow(triangle.x-player.x,2)+pow(triangle.y-player.y,2)),2)/3
-                player.y_acc += math.sin(math.atan2(player.y-triangle.y,triangle.x-player.x))*math.log(8*math.sqrt(pow(triangle.x-player.x,2)+pow(triangle.y-player.y,2)),2)/3
+                player.x_acc += math.cos(math.atan2(player.y-triangle.y,triangle.x-player.x))*math.log(8*math.sqrt(pow(triangle.x-player.x,2)+pow(triangle.y-player.y,2)),2)/6
+                player.y_acc += math.sin(math.atan2(player.y-triangle.y,triangle.x-player.x))*math.log(8*math.sqrt(pow(triangle.x-player.x,2)+pow(triangle.y-player.y,2)),2)/6
         # delete triangle if health is equal to 0
         if triangle.health <= 0:
             triangle.health = 0
@@ -340,8 +343,8 @@ while not done:
                 player.x_acc = 0
                 player.y_acc = 0
                 #recoil
-                player.x_acc += math.cos(math.atan2(player.y-hexagon.y,hexagon.x-player.x))*math.log(8*math.sqrt(pow(hexagon.x-player.x,2)+pow(hexagon.y-player.y,2)),2)/3
-                player.y_acc += math.sin(math.atan2(player.y-hexagon.y,hexagon.x-player.x))*math.log(8*math.sqrt(pow(hexagon.x-player.x,2)+pow(hexagon.y-player.y,2)),2)/3
+                player.x_acc += math.cos(math.atan2(player.y-hexagon.y,hexagon.x-player.x))*math.log(8*math.sqrt(pow(hexagon.x-player.x,2)+pow(hexagon.y-player.y,2)),2)/6
+                player.y_acc += math.sin(math.atan2(player.y-hexagon.y,hexagon.x-player.x))*math.log(8*math.sqrt(pow(hexagon.x-player.x,2)+pow(hexagon.y-player.y,2)),2)/6
         # delete hexagon if health is equal to 0
         if hexagon.health <= 0:
             hexagon.health = 0
